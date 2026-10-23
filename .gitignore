@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Pipeline cache (rebuilt by build_graph.py)
+pipeline/cache/
+*.npy
+*.pkl
+
+# npm packages (the built libraries live in web/vendor/)
+node_modules/
+
+# Logs and secrets
+*.log
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# NOTE: web/data/graph_data.json is committed on purpose (the demo needs it)

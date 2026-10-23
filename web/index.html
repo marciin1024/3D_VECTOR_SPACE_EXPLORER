@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>3D Semantic Vector Space Explorer</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌐</text></svg>">
+</head>
+<body>
+  <div id="loading">
+    <div class="spinner"></div>
+    <div class="loading-title">3D Semantic Vector Space Explorer</div>
+    <div class="muted">Loading 270 documents…</div>
+  </div>
+  <div id="graph"></div>
+  <div id="query-label"></div>
+  <aside id="details"></aside>
+  <button id="reset-camera" title="Reset camera (in focus: back to overview)">Reset camera</button>
+
+  <aside id="panel">
+    <div class="panel-header">
+      <div class="app-title">3D Semantic Vector Space Explorer</div>
+      <button id="about-btn" title="About this visualization">About</button>
+    </div>
+
+    <h2>Clusters</h2>
+    <div id="cluster-list"></div>
+
+    <h2>Size</h2>
+    <div id="size-legend"></div>
+
+    <h2>Edges</h2>
+    <div class="radio-row">
+      <label><input type="radio" name="edge-view" value="both" checked> both</label>
+      <label><input type="radio" name="edge-view" value="semantic"> semantic</label>
+      <label><input type="radio" name="edge-view" value="structural"> structural</label>
+    </div>
+
+    <h2>Similarity threshold <span id="threshold-value"></span></h2>
+    <input type="range" id="threshold" min="0.25" max="0.75" step="0.01">
+    <div class="muted">visible edges: <span id="edge-count">–</span></div>
+    <div class="muted" id="threshold-hint" style="display:none">
+      Threshold not applied: structural edges encode the source category, not similarity.
+    </div>
+  </aside>
+
+  <div id="empty-state">
+    <p>No visible documents: all clusters are hidden.</p>
+    <button id="reset-filters">Reset filters</button>
+  </div>
+
+  <div id="about" role="dialog" aria-modal="true" aria-labelledby="about-title">
+    <div class="about-card">
+      <h1 id="about-title">3D Semantic Vector Space Explorer</h1>
+      <p class="lead">Each sphere is one document from the 20 Newsgroups corpus,
+        placed by its <b>meaning</b>: 384-dimensional sentence embeddings projected
+        to 3D. Documents that are close together are semantically similar.</p>
+
+      <h2>What you see</h2>
+      <ul>
+        <li><b>Color</b> = topic cluster (K-Means on the embeddings). The legend
+          shows each cluster's top keywords.</li>
+        <li><b>Size</b> = document length in words, <b>not</b> importance.</li>
+        <li><span class="line-swatch" style="background:rgb(120,160,220)"></span>
+          <b>Blue lines</b> = semantic similarity (cosine). Brighter and thicker
+          means more similar.</li>
+        <li><span class="line-swatch" style="background:rgb(153,153,153)"></span>
+          <b>Gray lines</b> = same source category.</li>
+      </ul>
+
+      <h2>Try it: simulate a RAG query</h2>
+      <p>Click any sphere. It becomes the <b>query</b>, and the 8 most similar
+        documents are retrieved
+        (<span class="line-swatch" style="background:rgb(255,200,80)"></span>
+        gold lines). This is exactly the context a RAG system would hand to the
+        language model. Click an entry in the side list to jump to that document.</p>
+
+      <h2>Controls</h2>
+      <p class="controls">drag: rotate · scroll: zoom · right-drag: pan ·
+        Esc: back to overview</p>
+
+      <button id="about-close">Got it</button>
+    </div>
+  </div>
+
+  <!-- Vendored builds (web/vendor/) — pinned three@0.169.0 + 3d-force-graph@1.73.0
+       + d3@7; no CDN, fully offline-capable (see NOTES) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js"
+    }
+  }
+  </script>
+  <script src="vendor/3d-force-graph.min.js"></script>
+  <script src="vendor/d3.min.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
