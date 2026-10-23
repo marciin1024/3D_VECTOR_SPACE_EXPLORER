@@ -2,7 +2,7 @@
 
 An interactive 3D map of document embeddings that makes the retrieval step of a RAG system visible: click a document and see which eight documents a nearest-neighbour retriever would hand to the LLM as context.
 
-**[Live demo](NETLIFY_URL)** (desktop browser, no installation) · [Project report (PDF)](report/Final_Report.pdf) · [Technical documentation](docs/TECHNICAL.md)
+**[Live demo](https://3d-vector-space-explorer.netlify.app)** (desktop browser, no installation) · [Project report (PDF)](report/Final_Report.pdf) · [Technical documentation](docs/TECHNICAL.md)
 
 ![Clicking a document retrieves its 8 nearest neighbours](report/screenshots/demo.gif)
 
